@@ -43,3 +43,4 @@ const styles = StyleSheet.create({
     },
 });
 export default HomeActivity;
+//I'm in!! //Joacim
