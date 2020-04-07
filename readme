@@ -1,0 +1,7 @@
+Setting up the project for the first time for android:
+1. On your phone, go activate developer options.
+2. In the developer options, activate USB-debugging.
+3. Plug phone into PC and allow USB-debugging when prompted.
+4. navigate to folder in terminal.
+5. run "npm install".
+6. run "npx react-native run-android".
