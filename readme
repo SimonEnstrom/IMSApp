@@ -48,4 +48,28 @@ Ex: git checkout Jacob1.0
 17. npx run react-native run-ios
 ** Building takes a few minutes. 
 
-// General git instructions 
+// General git Workflow instructions 
+~git status
+** Use this command before and after working with git to make sure that things look alright. To add ALL untracked files use "git add ."
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        ios/IMSApp.xcodeproj/project.xcworkspace/
+        ios/IMSApp.xcworkspace/
+        ios/Podfile.lock
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+~git add .
+
+~git commit
+
+~git push <remote> <branch>
+Ex: git push origin Jacob1.0
+** Origin seems to be default name of remote if you did "git clone". 
+
+~git status
+
+On branch Jacob1.0
+nothing to commit, working tree clean
