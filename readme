@@ -1,7 +1,51 @@
-Setting up the project for the first time for android:
+// Setting up the project for the first time for android:
 1. On your phone, go activate developer options.
 2. In the developer options, activate USB-debugging.
 3. Plug phone into PC and allow USB-debugging when prompted.
 4. navigate to folder in terminal.
 5. run "npm install".
 6. run "npx react-native run-android".
+
+
+// Workflow to join project and work with ios. 
+Steps to reproduce including errors: 
+
+1. Download xcode
+2. Open xcode -> Preferences -> Components
+3. Download an emulator
+
+4. Open terminal
+
+5. ~cd <path to project>
+Ex: cd Documents/IMS/project
+
+6. ~git clone <link>
+Ex: git clone https://github.com/SimonEnstrom/IMSApp.git
+
+7. ~cd IMSApp
+
+8. ~code .
+
+9. Open terminal in vsCode
+
+10. ~git branch <namn>
+Ex: git branch Jacob1.0
+
+11. ~git checkout <branch name>
+Ex: git checkout Jacob1.0
+
+12. ~npm install
+13. ~npx react-native run-ios
+
+"Error Failed to build iOS project. We ran "xcodebuild" command but it exited with error code 65. To debug build logs further, consider building your app with Xcode.app, by opening IMSApp.xcodeproj "
+
+
+14. ~cd IMSApp
+15. ~cd ios
+
+16. ~pod install
+
+17. npx run react-native run-ios
+** Building takes a few minutes. 
+
+// General git instructions 
