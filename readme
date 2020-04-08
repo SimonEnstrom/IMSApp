@@ -8,6 +8,7 @@
 
 
 // Workflow to join project and work with ios. 
+# All lines starting with "~" are terminal/shell commands written in the /IMSApp directory if nothing else is specified.
 Steps to reproduce including errors: 
 
 1. Download xcode
@@ -36,7 +37,7 @@ Ex: git checkout Jacob1.0
 
 12. ~npm install
 13. ~npx react-native run-ios
-
+# If this works already, which it should if you have merged your project with either "mergebranch" or "Jacob1.0", you can skip step 14-18
 "Error Failed to build iOS project. We ran "xcodebuild" command but it exited with error code 65.
  To debug build logs further, consider building your app with Xcode.app, by opening IMSApp.xcodeproj "
 
@@ -45,7 +46,9 @@ Ex: git checkout Jacob1.0
 
 16. ~pod install
 
-17. npx run react-native run-ios
+17. ~cd ..
+
+18. npx run react-native run-ios
 ** Building takes a few minutes. 
 
 // General git Workflow instructions 
@@ -63,7 +66,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 ~git add .
 
-~git commit
+~git commit -a -m"<message>"
 
 ~git push <remote> <branch>
 Ex: git push origin Jacob1.0
