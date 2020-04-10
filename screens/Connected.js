@@ -10,15 +10,20 @@ class ConnectActivity extends React.Component {
 render() {
     return (
     <View style={styles.container}>
-        <Text style={styles.headerText}>Profile Activity</Text>
+        <Text style={styles.headerText}>Go to map</Text>
     <Button
-        title="Go to Home"
-        onPress={() => this.props.navigation.navigate("Home")}
+        title="map"
+        onPress={() => this.props.navigation.navigate("Map")}
     />
-    <Text style={styles.headerText}> Go Back </Text>
+    <Text style={styles.headerText}> manual drive </Text>
     <Button
-        title="Go Back"
-        onPress={() => this.props.navigation.goBack()}
+        title="manual drive"
+        onPress={() => this.props.navigation.navigate("ManualDrive")}
+    />
+    <Text style={styles.headerText}> Go to data </Text>
+    <Button
+        title="data"
+        onPress={() => this.props.navigation.navigate("Data")}
     />
     </View>
     );}

@@ -10,11 +10,6 @@ class ManualDriveActivity extends React.Component {
 render() {
     return (
     <View style={styles.container}>
-        <Text style={styles.headerText}>Profile Activity</Text>
-    <Button
-        title="Go to Home"
-        onPress={() => this.props.navigation.navigate("Home")}
-    />
     <Text style={styles.headerText}> Go Back </Text>
     <Button
         title="Go Back"

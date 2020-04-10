@@ -20,9 +20,9 @@ class HomeActivity extends React.Component {
 render() {
     return (
     <View style={styles.container}>
-        <Text style={styles.headerText} >Home Activity</Text>
+        <Text style={styles.headerText} >Go to Connected</Text>
         <Button
-            title="Go to Profile Activity"
+            title="Go to Connected"
             onPress={() => this.props.navigation.navigate('Connected')}
         />
     </View>
