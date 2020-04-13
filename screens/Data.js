@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Button } from "react-native";
-class ConnectActivity extends React.Component {
+class DataActivity extends React.Component {
     static navigationOptions = {
-    title: "Connected",
+    title: "Data",
     headerStyle: {
     backgroundColor: "#73C6B6"
     }
@@ -10,20 +10,10 @@ class ConnectActivity extends React.Component {
 render() {
     return (
     <View style={styles.container}>
-        <Text style={styles.headerText}>Go to map</Text>
+    <Text style={styles.headerText}> Go Back </Text>
     <Button
-        title="map"
-        onPress={() => this.props.navigation.navigate("Map")}
-    />
-    <Text style={styles.headerText}> manual drive </Text>
-    <Button
-        title="manual drive"
-        onPress={() => this.props.navigation.navigate("ManualDrive")}
-    />
-    <Text style={styles.headerText}> Go to data </Text>
-    <Button
-        title="data"
-        onPress={() => this.props.navigation.navigate("Data")}
+        title="Go Back"
+        onPress={() => this.props.navigation.goBack()}
     />
     </View>
     );}
@@ -42,4 +32,4 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     }
 });
-export default ConnectActivity;
+export default DataActivity;
