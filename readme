@@ -48,7 +48,7 @@ Ex: git checkout Jacob1.0
 
 17. ~cd ..
 
-18. npx run react-native run-ios
+18. npx react-native run-ios
 ** Building takes a few minutes. 
 
 // General git Workflow instructions 

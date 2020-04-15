@@ -25,6 +25,11 @@ render() {
         title="data"
         onPress={() => this.props.navigation.navigate("Data")}
     />
+    <Text style={styles.headerText}> Go to Playbot </Text>
+    <Button
+        title="playbot"
+        onPress={() => this.props.navigation.navigate("Playbot")}
+    />
     </View>
     );}
 }
