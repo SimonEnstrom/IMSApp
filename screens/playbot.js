@@ -39,15 +39,19 @@ const styles = StyleSheet.create({
     }
 });
 function createBotMessage(){
-    const stx = 2
-    let posX = 27
-    let posY = 93
-    let col = 1
-    let colX = 222
-    let colY = 23
-    const etx = 3
-    let message = ""+stx+""+posX+""+posY+""+col+""+colX+""+colY+""+etx
-    console.log("Message: ", message)
+    const stx = 2;
+    let unit = 0;
+    let driveMode = 0;
+    let command = 0;
+    let posX = 227;
+    let posY = 133;
+    let col = 1;
+    let colX = 322;
+    let colY = 123;
+    const etx = 3;
+    let message = ""+stx+""+unit+""+driveMode+""+command+""+posX+""+posY+""+col+""+colX+""+colY+""+etx;
+    console.log("Message sent from bot: ", message);
+    dbHandler.handleMessage(message);
 }
 
 export default PlaybotActivity;

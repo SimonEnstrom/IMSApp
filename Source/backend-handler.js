@@ -70,9 +70,70 @@ const dbFunctions = {
             console.log("WorkoutsArray: ", workOutsArray[0].exercises)
             })
         })
+    },
+
+    handleMessage: function(message){
+        // TODO To get subString use .substr(start, lenght)
+        // [0] 2 Start of message
+        // [1] 0 message from mower
+        // [2] drive mode
+        // [3] drive command
+        // [4] posX if [4] == 3 then take [5] and [6] only
+        // [7] pos Y -- || -- [8] and [9]
+        // [10] 0/1 true false for collision
+        // [11] colX if collission handle as pos [12] [13]
+        // [14] colY -- || -- [15] [16]
+        // [17] 3 end of message
+        let posX = 0;
+        let posY = 0;
+        let didCollide = 0;
+        let colX = 0;
+        let colY = 0;
+        if(message[4] == '3'){
+            posX = intParser(message, 5, 2);
+            console.log("PosX: ", posX);
+        }
+        else{
+            posX = intParser(message, 4, 3);
+        }
+        if(message[7] == '3'){
+            posY = intParser(message, 8, 2);
+        }
+        else{
+            posY = intParser(message, 7, 3);
+        }
+        if(message[10] == '1'){
+            didCollide = true;
+            if(message[11] == '3'){
+                colX = intParser(message, 12, 2);
+            }
+            else{
+                colX = intParser(message, 11, 3);
+            }
+            if(message[14] == '3'){
+                colY = intParser(message, 15, 2);
+            }
+            else{
+                colY = intParser(message, 14, 3);
+            }
+        }
+        console.log("Posy: ", posY);
+        console.log("didCol: ", didCollide);
+        console.log("ColX: ", colX);
+        console.log("coly: ", colY);
+        
+        this.pushNewPosition(posX, posY);
+        if(didCollide){
+            this.pushNewCollision(colX, colY);
+        }
+
     }
 }
 // Returns a string with YYYY-MM-DD HH-MM-SS
+function intParser(message, start, lenght){
+    return parseInt(message.substr(start, lenght))
+}
+
 function getCurrentDate(){
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
