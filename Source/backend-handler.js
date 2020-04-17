@@ -16,28 +16,13 @@ let sessionRef = getCurrentDate();
 const dbFunctions = {
 
     // Push x and y coordinates to /Current DateTime ref / positions
-    pushNewPosition: function(x, y){
+    pushNewPosition: function(x, y, didCollide){
         console.log("In set new position")
         let ref = '/Sessions/' + sessionRef + '/positions';
         firebase.database().ref(ref).push({
             xValue: x,
-            yValue: y
-        }).then((data)=>{
-            // Success callback
-            console.log("Data stored: ", data)
-        }).catch((error)=>{
-            // Error callback
-            console.log("Error storing data: ", error)
-        })
-    },
-
-    // Pushing up a new x and y value under /Current DateTime / Collision
-    pushNewCollision: function(x, y){
-        console.log("In set new position")
-        let ref = '/Sessions/' + sessionRef + '/collisions';
-        firebase.database().ref(ref).push({
-            xValue: x,
-            yValue: y
+            yValue: y,
+            collision: didCollide
         }).then((data)=>{
             // Success callback
             console.log("Data stored: ", data)
@@ -104,29 +89,14 @@ const dbFunctions = {
         }
         if(message[10] == '1'){
             didCollide = true;
-            if(message[11] == '3'){
-                colX = intParser(message, 12, 2);
-            }
-            else{
-                colX = intParser(message, 11, 3);
-            }
-            if(message[14] == '3'){
-                colY = intParser(message, 15, 2);
-            }
-            else{
-                colY = intParser(message, 14, 3);
-            }
         }
         console.log("Posy: ", posY);
         console.log("didCol: ", didCollide);
         console.log("ColX: ", colX);
         console.log("coly: ", colY);
-        
-        this.pushNewPosition(posX, posY);
-        if(didCollide){
-            this.pushNewCollision(colX, colY);
-        }
 
+        didCollide = 'true';
+        this.pushNewPosition(posX, posY, didCollide);
     }
 }
 // Returns a string with YYYY-MM-DD HH-MM-SS
