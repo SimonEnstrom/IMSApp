@@ -3,26 +3,32 @@ import { Platform, StyleSheet, Text, View, Button } from "react-native";
 import dbHandler from '../Source/backend-handler'
 class PlaybotActivity extends React.Component {
     static navigationOptions = {
-    title: "playbot",
-    headerStyle: {
-    backgroundColor: "#73C6B6"
+        title: "playbot",
+        headerStyle: {
+            backgroundColor: "#73C6B6"
+        }
+    };
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.headerText}> Go Back </Text>
+                <Button
+                    title="Go Back"
+                    onPress={() => this.props.navigation.goBack()}
+                />
+                <Text style={styles.headerText}> Run Backend </Text>
+                <Button
+                    title="Send data"
+                    onPress={() => createBotMessage()}
+                />
+                <Text style={styles.headerText}> Run Backend </Text>
+                <Button
+                    title="Retrive Data"
+                    onPress={() => retriveData()}
+                />
+            </View>
+        );
     }
-};
-render() {
-    return (
-    <View style={styles.container}>
-    <Text style={styles.headerText}> Go Back </Text>
-    <Button
-        title="Go Back"
-        onPress={() => this.props.navigation.goBack()}
-    />
-    <Text style={styles.headerText}> Run Backend </Text>
-    <Button
-        title="Run Backend"
-        onPress={() => createBotMessage()}
-    />
-    </View>
-    );}
 }
 const styles = StyleSheet.create({
     container: {
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     }
 });
-function createBotMessage(){
+function createBotMessage() {
     const stx = 2;
     let unit = 0;
     let driveMode = 0;
@@ -49,9 +55,15 @@ function createBotMessage(){
     let colX = 322;
     let colY = 123;
     const etx = 3;
-    let message = ""+stx+""+unit+""+driveMode+""+command+""+posX+""+posY+""+col+""+colX+""+colY+""+etx;
+    let message = "" + stx + "" + unit + "" + driveMode + "" + command + "" + posX + "" + posY + "" + col + "" + colX + "" + colY + "" + etx;
     console.log("Message sent from bot: ", message);
     dbHandler.handleMessage(message);
+}
+
+function retriveData() {
+   let arr = dbHandler.retriveData();
+   console.log("arr");
+   console.log(arr[0].location.didCollide);  
 }
 
 export default PlaybotActivity;
