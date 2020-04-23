@@ -32,31 +32,6 @@ const dbFunctions = {
         })
     },
 
-    // This will be changed, stolen from my app to remeber how to handle incoming objects. 
-    getWorkouts: function () {
-        let workOutsArray = []
-        firebase.database().ref('/Workouts').once('value', function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                let workout = {
-                    workoutTitle: "",
-                    exercises: []
-                }
-                workout.workoutTitle = childSnapshot.key;
-                childSnapshot.forEach(function (grandChild) {
-                    let exercise = {
-                        exerciesTitle: grandChild.key,
-                        sets: grandChild.val().Set,
-                        reps: grandChild.val().Reps,
-                        weight: grandChild.val().Weight
-                    }
-                    workout.exercises.push(exercise)
-                })
-                workOutsArray.push(workout)
-                console.log("WorkoutsArray: ", workOutsArray[0].exercises)
-            })
-        })
-    },
-
     retriveData: function () {
         var database = firebase.database().ref('/Sessions');
         let positionsArray = [];
