@@ -173,17 +173,17 @@ export default class App extends Component {
             // https://github.com/sandeepmistry/bleno/tree/master/examples/pizza
             BleManager.retrieveServices(peripheral.id).then((peripheralInfo) => {
               console.log(peripheralInfo);
-              var service = '13333333-3333-3333-3333-333333333337';
-              var bakeCharacteristic = '13333333-3333-3333-3333-333333330003';
-              var crustCharacteristic = '13333333-3333-3333-3333-333333330001';
+              var service = '0000ffe1-0000-1000-8000-00805f9b34fb';
+              var bakeCharacteristic = '0000ffe2-0000-1000-8000-00805f9b34fb';
+              var crustCharacteristic = '0000ffe3-0000-1000-8000-00805f9b34fb';
 
               setTimeout(() => {
                 BleManager.startNotification(peripheral.id, service, bakeCharacteristic).then(() => {
                   console.log('Started notification on ' + peripheral.id);
                   setTimeout(() => {
-                    BleManager.write(peripheral.id, service, crustCharacteristic, [0]).then(() => {
-                      console.log('Writed NORMAL crust');
-                      BleManager.write(peripheral.id, service, bakeCharacteristic, [1,95]).then(() => {
+                    BleManager.write(peripheral.id, service, crustCharacteristic, [1, 1, 1, 1, 1, 1], 10).then(() => {
+                      console.log('Writed NORMAL2 crust');
+                      BleManager.write(peripheral.id, service, crustCharacteristic, [1, 1, 1, 1, 1, 1], 10).then(() => {
                         console.log('Writed 351 temperature, the pizza should be BAKED');
                         /*
                         var PizzaBakeResult = {
@@ -210,6 +210,8 @@ export default class App extends Component {
       }
     }
   }
+
+  
 
   renderItem(item) {
     const color = item.connected ? 'green' : '#fff';
