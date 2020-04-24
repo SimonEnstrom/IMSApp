@@ -20,6 +20,8 @@ class PlaybotActivity extends React.Component {
         <Button title="Send data" onPress={() => createBotMessage()} />
         <Text style={styles.headerText}> Run Backend </Text>
         <Button title="Retrive Data" onPress={() => retriveData()} />
+        <Text style={styles.headerText}> Push random coordinates </Text>
+        <Button title="Send random cords" onPress={() => sendRandomPos()} />
       </View>
     );
   }
@@ -71,7 +73,15 @@ function createBotMessage() {
 function retriveData() {
   let arr = dbHandler.retriveData();
   console.log('arr');
-  console.log(arr[0].location.didCollide);
+  console.log(arr[1].location);
+}
+
+function sendRandomPos() {
+  let xCord = Math.floor(Math.random() * 254);
+  let yCord = Math.floor(Math.random() * 254);
+  let didCollide = false;
+
+  dbHandler.pushNewPosition(xCord, yCord, didCollide);
 }
 
 export default PlaybotActivity;

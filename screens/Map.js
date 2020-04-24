@@ -23,6 +23,8 @@ import Svg, {
   Mask,
 } from 'react-native-svg';
 
+import dbHandler from '../Source/backend-handler';
+
 class MapActivity extends React.Component {
   static navigationOptions = {
     title: 'Map',
@@ -34,14 +36,16 @@ class MapActivity extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.headerText}> Go Back </Text>
-        <Button
-          title="Go Back"
-          onPress={() => this.props.navigation.goBack()}
-        />
+
         <View style={[StyleSheet.absoluteFill, styles.svgContainer]}>
+          <Button
+            title="Go Back"
+            onPress={() => this.props.navigation.goBack()}
+          />
+          <Button title="Import path" onPress={() => getPath()} />
           <Svg height="80%" width="100%" viewBox="0 0 254 254">
             <Polyline
-              points="127,127 137,137 157,157 93,130 97,120 65,70 50,50 40,30 10,10 80,10 140,10"
+              points={getPath()}
               fill="none"
               stroke="black"
               strokeWidth="3"
@@ -52,6 +56,31 @@ class MapActivity extends React.Component {
     );
   }
 }
+function getPath() {
+  console.log('Importing path');
+  const arr = dbHandler.retriveData();
+  const sessionIndex = 2;
+  const positionArr = arr[sessionIndex].location;
+  let xCord;
+  let yCord;
+  let colArr = [];
+  let path = '';
+
+  for (let i = 0; i < positionArr.length; i++) {
+    let partialString = '';
+    xCord = positionArr[i].xValue;
+    yCord = positionArr[i].yValue;
+
+    partialString = xCord + ',' + yCord + ' ';
+
+    colArr.push(positionArr[i].didCollide);
+
+    path += partialString;
+  }
+  console.log('path: ', path);
+  return path;
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

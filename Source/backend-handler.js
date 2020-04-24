@@ -36,34 +36,6 @@ const dbFunctions = {
       });
   },
 
-  // This will be changed, stolen from my app to remeber how to handle incoming objects.
-  getWorkouts: function() {
-    let workOutsArray = [];
-    firebase
-      .database()
-      .ref('/Workouts')
-      .once('value', function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-          let workout = {
-            workoutTitle: '',
-            exercises: [],
-          };
-          workout.workoutTitle = childSnapshot.key;
-          childSnapshot.forEach(function(grandChild) {
-            let exercise = {
-              exerciesTitle: grandChild.key,
-              sets: grandChild.val().Set,
-              reps: grandChild.val().Reps,
-              weight: grandChild.val().Weight,
-            };
-            workout.exercises.push(exercise);
-          });
-          workOutsArray.push(workout);
-          console.log('WorkoutsArray: ', workOutsArray[0].exercises);
-        });
-      });
-  },
-
   retriveData: function() {
     var database = firebase.database().ref('/Sessions');
     let positionsArray = [];
@@ -72,7 +44,7 @@ const dbFunctions = {
         let position = {
           date: '',
           id: '',
-          location: '',
+          location: [],
         };
         position.date = childSnapshot.key;
         childSnapshot.forEach(function(grandChild) {
@@ -82,27 +54,15 @@ const dbFunctions = {
             xValue: grandChild.val().xValue,
             yValue: grandChild.val().yValue,
           };
-          position.location = coordinates;
+          position.location.push(coordinates);
         });
         positionsArray.push(position);
       });
     });
-    console.log(positionsArray);
     return positionsArray;
   },
 
   handleMessage: function(message) {
-    // TODO To get subString use .substr(start, lenght)
-    // [0] 2 Start of message
-    // [1] 0 message from mower
-    // [2] drive mode
-    // [3] drive command
-    // [4] posX if [4] == 3 then take [5] and [6] only
-    // [7] pos Y -- || -- [8] and [9]
-    // [10] 0/1 true false for collision
-    // [11] colX if collission handle as pos [12] [13]
-    // [14] colY -- || -- [15] [16]
-    // [17] 3 end of message
     let posX = 0;
     let posY = 0;
     let didCollide = false;
