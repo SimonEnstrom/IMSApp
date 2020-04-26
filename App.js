@@ -13,11 +13,10 @@ const RootStack = createStackNavigator({
   ManualDrive: { screen: ManualDriveActivity },
   Data: { screen: DataActivity },
   Map: {  screen: MapActivity },
-  },
-  {
-    initialRouteName: 'Home',
-  }
-);
+},
+{
+  initialRouteName: 'Home',
+});
 
 const App = createAppContainer(RootStack);
 export default App;
