@@ -150,6 +150,18 @@ export default class Bluetooth extends Component {
         });
     }
 
+    /*
+    BleManager.write('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX', data)
+  .then(() => {
+    // Success code
+    console.log('Write: ' + data);
+  })
+  .catch((error) => {
+    // Failure code
+    console.log(error);
+  });
+  */
+
     handleDiscoverPeripheral(peripheral) {
         var peripherals = this.state.peripherals;
         console.log('Got ble peripheral', peripheral);
