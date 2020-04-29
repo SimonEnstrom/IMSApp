@@ -17,8 +17,6 @@ class PlaybotActivity extends React.Component {
           onPress={() => this.props.navigation.goBack()}
         />
         <Text style={styles.headerText}> Run Backend </Text>
-        <Button title="Send data" onPress={() => createBotMessage()} />
-        <Text style={styles.headerText}> Run Backend </Text>
         <Button title="Retrive Data" onPress={() => retriveData()} />
         <Text style={styles.headerText}> Push random coordinates </Text>
         <Button
@@ -33,36 +31,6 @@ class PlaybotActivity extends React.Component {
       </View>
     );
   }
-}
-
-function createBotMessage() {
-  const stx = 2;
-  let unit = 0;
-  let driveMode = 0;
-  let command = 0;
-  let posX = 157;
-  let posY = 157;
-  let col = 1;
-  const etx = 3;
-  let message =
-    '' +
-    stx +
-    '' +
-    unit +
-    '' +
-    driveMode +
-    '' +
-    command +
-    '' +
-    posX +
-    '' +
-    posY +
-    '' +
-    col +
-    '' +
-    etx;
-  console.log('Message sent from bot: ', message);
-  dbHandler.handleMessage(message);
 }
 
 function retriveData() {

@@ -25,20 +25,16 @@ const dbFunctions = {
   retriveData: function() {
     return getData();
   },
-
-  handleMessage: function(message) {
-    receiveMessage(message);
-  },
+  // handleMessage: function(message) {
+  //   receiveMessage(message);
+  // },
 
   continueSession: function(x, y, didCollide) {
     sesseionRef = getLastSession();
     pushToDatabase(x, y, didCollide);
   },
 };
-// Returns a string with YYYY-MM-DD HH-MM-SS
-function intParser(message, start, lenght) {
-  return parseInt(message.substr(start, lenght));
-}
+
 function getCurrentDate() {
   var today = new Date();
   var date =
@@ -68,35 +64,6 @@ function pushToDatabase(x, y, didCollide) {
       console.log('Error storing data: ', error);
     });
 }
-
-function receiveMessage(message) {
-  let posX = 0;
-  let posY = 0;
-  let didCollide = false;
-  let colX = 0;
-  let colY = 0;
-  if (message[4] == '3') {
-    posX = intParser(message, 5, 2);
-    console.log('PosX: ', posX);
-  } else {
-    posX = intParser(message, 4, 3);
-  }
-  if (message[7] == '3') {
-    posY = intParser(message, 8, 2);
-  } else {
-    posY = intParser(message, 7, 3);
-  }
-  if (message[10] == '1') {
-    didCollide = true;
-  }
-  console.log('Posy: ', posY);
-  console.log('didCol: ', didCollide);
-  console.log('ColX: ', colX);
-  console.log('coly: ', colY);
-
-  pushToDatabase(posX, posY, didCollide);
-}
-
 function getData() {
   console.log('In getData()');
   var database = firebase.database().ref('/Sessions');
@@ -121,7 +88,7 @@ function getData() {
       positionsArray.push(position);
     });
   });
-  console.log('Returning Position array: ', positionsArray);
+  console.log('Returning Position array');
   return positionsArray;
 }
 
@@ -135,6 +102,34 @@ function getLastSession() {
   console.log('Returning ref:', ref);
   return ref;
 }
+
+// function receiveMessage(message) {
+//   let posX = 0;
+//   let posY = 0;
+//   let didCollide = false;
+//   let colX = 0;
+//   let colY = 0;
+//   if (message[4] == '3') {
+//     posX = intParser(message, 5, 2);
+//     console.log('PosX: ', posX);
+//   } else {
+//     posX = intParser(message, 4, 3);
+//   }
+//   if (message[7] == '3') {
+//     posY = intParser(message, 8, 2);
+//   } else {
+//     posY = intParser(message, 7, 3);
+//   }
+//   if (message[10] == '1') {
+//     didCollide = true;
+//   }
+//   console.log('Posy: ', posY);
+//   console.log('didCol: ', didCollide);
+//   console.log('ColX: ', colX);
+//   console.log('coly: ', colY);
+
+//   pushToDatabase(posX, posY, didCollide);
+// }
 
 // To use functions under dbFunctions
 // 1. import dbHandler from '../Source/backend-handler.js'
