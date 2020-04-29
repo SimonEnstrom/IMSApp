@@ -20,9 +20,9 @@ import BleManager from 'react-native-ble-manager';
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
-class AnkbajsActivity extends React.Component {
+class BluetoothActivity extends React.Component {
     static navigationOptions = {
-    title: 'Ankbajs',
+    title: 'Bluetooth',
     headerStyle: {
     backgroundColor: '#03A9F4',
     },
@@ -118,8 +118,8 @@ class AnkbajsActivity extends React.Component {
 
             console.log('Received data from ' + data.peripheral + ' characteristic ' + data.characteristic, data.value);
             console.log("NÅT LÅNGT I CAPS TYP" + global.direction);
-            BleManager.write(peripheral.id, '0000ffe1-0000-1000-8000-00805f9b34fb', crustCharacteristic, [1, 1, global.direction, 1, 1, 1], 10).then(() => {
-                console.log('Writed ' + global.direction + ' yo');
+            BleManager.write(peripheral.id, '0000ffe1-0000-1000-8000-00805f9b34fb', crustCharacteristic, [1, global.mode, global.direction, 1, 1, 1], 6).then(() => {
+                console.log('DATA SENT: DIRECTION: ' + global.direction + ' AND MODE: ' + global.mode);
             });
         }, 900);
     }
@@ -256,7 +256,7 @@ class AnkbajsActivity extends React.Component {
                 <Button title="Retrieve connected peripherals" onPress={() => this.retrieveConnected() } />
             </View>
             <View>
-                <Button title="Manual drive f" onPress={() => this.props.navigation.navigate('ManualDrive') } />
+                <Button title="Manual drive" onPress={() => this.props.navigation.navigate('ManualDrive') } />
             </View>
 
             <ScrollView style={styles.scroll}>
@@ -291,5 +291,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
 });
-export default AnkbajsActivity;
+export default BluetoothActivity;
 //I'm in!! //Joacim

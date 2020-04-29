@@ -25,14 +25,10 @@ render() {
         title="data"
         onPress={() => this.props.navigation.navigate("Data")}
     />
+    <Text style={styles.headerText}> Go to Bluetooth </Text>
     <Button
         title="bluetooth"
         onPress={() => this.props.navigation.navigate("Bluetooth")}
-    />
-    
-    <Button
-        title="Ankbajs"
-        onPress={() => this.props.navigation.navigate("Ankbajs")}
     />
     </View>
     );}

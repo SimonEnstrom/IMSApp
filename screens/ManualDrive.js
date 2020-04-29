@@ -24,6 +24,7 @@ class ManualDriveActivity extends React.Component {
         this.handleLeft = this.handleLeft.bind(this);
         this.handleRight = this.handleRight.bind(this);
         this.handleRelease = this.handleRelease.bind(this);
+        this.toogleMode = this.toggleMode.bind(this);
     }
 
     componentDidMount() {
@@ -55,11 +56,22 @@ class ManualDriveActivity extends React.Component {
         console.log("release");
     }
 
+    toggleMode() {
+        console.log(global.mode)
+        if(global.mode == 1) {
+            global.mode = 0;
+        }else {global.mode = 1;}
+    }
+
     render() {
     return (
     <View style={styles.buttonContainer}>
         <Text style={styles.headerText}>Manual Drive Buttons k</Text>
-        {/* Up */}
+        <Button
+        title={global.mode ? 'on' : 'off'}
+        onPress={this.toogleMode} 
+        />
+        
         <View style={styles.manUp}>
         <TouchableOpacity onPressIn={this.handleUp} onPressOut={this.handleRelease}>
                 <Image source={require('../img/ManButton.png')} />
