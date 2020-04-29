@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Button, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import BackgroundTask from 'react-native-background-task';
 
-
-BackgroundTask.define(async () => {
-    console.log('Hello from a background task');
-    BackgroundTask.finish();
-  });
 
 class ManualDriveActivity extends React.Component {
     static navigationOptions = {
@@ -27,9 +21,6 @@ class ManualDriveActivity extends React.Component {
         this.toogleMode = this.toggleMode.bind(this);
     }
 
-    componentDidMount() {
-        BackgroundTask.schedule();
-      }
 
     handleUp() {
         global.direction = 1;
