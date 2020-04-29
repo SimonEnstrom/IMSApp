@@ -7,12 +7,14 @@ import ConnectedActivity from './screens/Connected';
 import ManualDriveActivity from './screens/ManualDrive';
 import DataActivity from './screens/Data';
 import MapActivity from './screens/Map';
+import AnkbajsActivity from './screens/Ankbajs'
 const RootStack = createStackNavigator({
   Home: { screen: HomeActivity },
   Connected: { screen: ConnectedActivity },
   ManualDrive: { screen: ManualDriveActivity },
   Data: { screen: DataActivity },
   Map: {  screen: MapActivity },
+  Ankbajs: { screen: AnkbajsActivity},
 },
 {
   initialRouteName: 'Home',
