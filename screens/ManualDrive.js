@@ -21,9 +21,6 @@ class ManualDriveActivity extends React.Component {
         this.toogleMode = this.toggleMode.bind(this);
     }
 
-    componentDidMount() {
-        BackgroundTask.schedule();
-      }
 
     handleUp() {
         global.direction = 1;
