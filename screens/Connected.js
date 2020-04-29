@@ -25,6 +25,15 @@ render() {
         title="data"
         onPress={() => this.props.navigation.navigate("Data")}
     />
+    <Button
+        title="bluetooth"
+        onPress={() => this.props.navigation.navigate("Bluetooth")}
+    />
+    
+    <Button
+        title="Ankbajs"
+        onPress={() => this.props.navigation.navigate("Ankbajs")}
+    />
     </View>
     );}
 }

@@ -24,37 +24,38 @@ class ManualDriveActivity extends React.Component {
         this.handleLeft = this.handleLeft.bind(this);
         this.handleRight = this.handleRight.bind(this);
         this.handleRelease = this.handleRelease.bind(this);
-        
-        this.direction = 0;
     }
 
     componentDidMount() {
-        BackgroundTask.schedule()
+        BackgroundTask.schedule();
       }
 
     handleUp() {
-        this.direction = 1;
+        global.direction = 1;
         console.log("up");
     }
-    
-    handleLeft() {
-        this.direction = 2;
-        console.log("left");
-    }
-    handleRight() {
-        this.direction = 3;
-        console.log("right");
-    }
+
     handleDown() {
-        this.direction = 4;
+        global.direction = 2;
         console.log("down");
     }
+
+    handleLeft() {
+        global.direction = 4;
+        console.log("left");
+    }
+    
+    handleRight() {
+        global.direction = 3;
+        console.log("right");
+    }
+
     handleRelease() {
-        this.direction = 0;
+        global.direction = 0;
         console.log("release");
     }
 
-render() {
+    render() {
     return (
     <View style={styles.buttonContainer}>
         <Text style={styles.headerText}>Manual Drive Buttons k</Text>

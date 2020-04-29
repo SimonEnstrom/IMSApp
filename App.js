@@ -7,16 +7,23 @@ import ConnectedActivity from './screens/Connected';
 import ManualDriveActivity from './screens/ManualDrive';
 import DataActivity from './screens/Data';
 import MapActivity from './screens/Map';
+import BluetoothActivity from './Bluetooth';
+import AnkbajsActivity from './screens/Ankbajs';
+global.direction = 0;
+global.autonomous = 0;
 const RootStack = createStackNavigator({
   Home: { screen: HomeActivity },
   Connected: { screen: ConnectedActivity },
   ManualDrive: { screen: ManualDriveActivity },
   Data: { screen: DataActivity },
   Map: {  screen: MapActivity },
+  Bluetooth: { screen: BluetoothActivity },
+  Ankbajs: { screen: AnkbajsActivity }
 },
 {
-  initialRouteName: 'Home',
+  initialRouteName: 'Ankbajs',
 });
+console.disableYellowBox = true;
 
 const App = createAppContainer(RootStack);
 export default App;
