@@ -24,54 +24,5 @@ const RootStack = createStackNavigator({
 });
 console.disableYellowBox = true;
 
-
-  render() {
-    const list = Array.from(this.state.peripherals.values());
-    const btnScanTitle = 'Scan Bluetooth (' + (this.state.scanning ? 'on' : 'off') + ')';
-
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.container}>
-          <View style={{margin: 10}}>
-            <Button title={btnScanTitle} onPress={() => this.startScan() } />
-          </View>
-
-          <View style={{margin: 10}}>
-            <Button title="Retrieve connected peripherals" onPress={() => this.retrieveConnected() } />
-          </View>
-
-          <ScrollView style={styles.scroll}>
-            {(list.length == 0) &&
-              <View style={{flex:1, margin: 20}}>
-                <Text style={{textAlign: 'center'}}>No peripherals</Text>
-              </View>
-            }
-            <FlatList
-              data={list}
-              renderItem={({ item }) => this.renderItem(item) }
-              keyExtractor={item => item.id}
-            />
-
-          </ScrollView>
-        </View>
-      </SafeAreaView>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-    width: window.width,
-    height: window.height
-  },
-  scroll: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
-    margin: 10,
-  },
-  row: {
-    margin: 10
-  },
-});
+const App = createAppContainer(RootStack);
+export default App;
