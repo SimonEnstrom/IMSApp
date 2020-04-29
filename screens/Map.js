@@ -59,26 +59,34 @@ class MapActivity extends React.Component {
 function getPath() {
   console.log('Importing path');
   const arr = dbHandler.retriveData();
-  const sessionIndex = 3;
-  const positionArr = arr[sessionIndex].location;
-  let xCord;
-  let yCord;
-  let colArr = [];
-  let path = '';
-
-  for (let i = 0; i < positionArr.length; i++) {
-    let partialString = '';
-    xCord = positionArr[i].xValue;
-    yCord = positionArr[i].yValue;
-
-    partialString = xCord + ',' + yCord + ' ';
-
-    colArr.push(positionArr[i].didCollide);
-
-    path += partialString;
+  let sessionIndex = arr.length - 1; // Get latest path in DB.
+  console.log('Session index: ', sessionIndex);
+  if (sessionIndex < 0) {
+    sessionIndex = 0;
   }
-  console.log('path: ', path);
-  return path;
+  try {
+    const positionArr = arr[sessionIndex].location;
+    let xCord;
+    let yCord;
+    let colArr = [];
+    let path = '';
+
+    for (let i = 0; i < positionArr.length; i++) {
+      let partialString = '';
+      xCord = positionArr[i].xValue;
+      yCord = positionArr[i].yValue;
+
+      partialString = xCord + ',' + yCord + ' ';
+
+      colArr.push(positionArr[i].didCollide);
+
+      path += partialString;
+    }
+    console.log('path: ', path);
+    return path;
+  } catch (error) {
+    console.log('Error creating path: ', error);
+  }
 }
 
 const styles = StyleSheet.create({
