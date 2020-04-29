@@ -43,7 +43,7 @@ class MapActivity extends React.Component {
             onPress={() => this.props.navigation.goBack()}
           />
           <Button title="Import path" onPress={() => getPath()} />
-          <Svg height="80%" width="100%" viewBox="0 0 254 254">
+          <Svg height="80%" width="90%" viewBox="0 0 254 254">
             <Polyline
               points={getPath()}
               fill="none"
@@ -59,7 +59,7 @@ class MapActivity extends React.Component {
 function getPath() {
   console.log('Importing path');
   const arr = dbHandler.retriveData();
-  const sessionIndex = 2;
+  const sessionIndex = 3;
   const positionArr = arr[sessionIndex].location;
   let xCord;
   let yCord;

@@ -77,11 +77,25 @@ function retriveData() {
 }
 
 function sendRandomPos() {
-  let xCord = Math.floor(Math.random() * 254);
-  let yCord = Math.floor(Math.random() * 254);
-  let didCollide = false;
+  const loopVar = 12;
+  let index = 0;
 
-  dbHandler.pushNewPosition(xCord, yCord, didCollide);
+  while (index < loopVar) {
+    let xCord = Math.floor(Math.random() * 254);
+    let yCord = Math.floor(Math.random() * 254);
+    let didCollide = false;
+    if (xCord < 63) {
+      xCord = 0;
+    } else if (xCord < 127) {
+      xCord = 254;
+    } else if (xCord < 190) {
+      yCord = 0;
+    } else if (xCord < 255) {
+      yCord = 254;
+    }
+    dbHandler.pushNewPosition(xCord, yCord, didCollide);
+    index++;
+  }
 }
 
 export default PlaybotActivity;
