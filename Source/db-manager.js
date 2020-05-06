@@ -23,7 +23,7 @@ function getSessions() {
   });
   return keys;
 }
-//Returns all points under a session key
+//Returns an array with all points under a session key
 //Ex points[0] = {x: 127, y: 219, didCollide: false}
 function getData(keyRef) {
   const ref = '/Sessions/' + keyRef;
@@ -101,7 +101,7 @@ const publics = {
     let key = getLastSessionKey();
     return getData(key);
   },
-  // Use get all sessions function to get all key, and user this function with
+  // Use get all sessions function to get all keys, and use this function with
   // chosen key to get path for an older session
   getOtherSession: function(key) {
     return getData(key);
