@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 import dbHandler from '../Source/backend-handler';
+import dbManager from '../Source/db-manager';
 class PlaybotActivity extends React.Component {
   static navigationOptions = {
     title: 'playbot',
@@ -16,16 +17,20 @@ class PlaybotActivity extends React.Component {
           title="Go Back"
           onPress={() => this.props.navigation.goBack()}
         />
-        <Text style={styles.headerText}> Run Backend </Text>
-        <Button title="Retrive Data" onPress={() => retriveData()} />
-        <Text style={styles.headerText}> Push random coordinates </Text>
+        <Text style={styles.headerText}> Run Tester function </Text>
+        <Button title="Run tester" onPress={() => tester()} />
+        <Text style={styles.headerText}>
+          Push 12 rand coords to new session
+        </Text>
         <Button
           title="Send random cords"
           onPress={() => sendRandomPosToNewSession()}
         />
-        <Text style={styles.headerText}> Continue Session </Text>
+        <Text style={styles.headerText}>
+          Push 12 rand coords to last session
+        </Text>
         <Button
-          title="Continue Session"
+          title="Send random cords"
           onPress={() => sendRandomPosToOldSession()}
         />
       </View>
@@ -33,18 +38,15 @@ class PlaybotActivity extends React.Component {
   }
 }
 
-function retriveData() {
+function tester() {
   //dbHandler.continueSession();
-
-  let arr = dbHandler.retriveData();
-  console.log('In playbot arr');
-  console.log(arr);
+  dbManager.tester();
 }
 
 function sendRandomPosToNewSession() {
   const loopVar = 12;
   let index = 0;
-
+  dbManager.startNewSession();
   while (index < loopVar) {
     let xCord = Math.floor(Math.random() * 254);
     let yCord = Math.floor(Math.random() * 254);
@@ -58,7 +60,7 @@ function sendRandomPosToNewSession() {
     } else if (xCord < 255) {
       yCord = 254;
     }
-    dbHandler.pushNewPosition(xCord, yCord, didCollide);
+    dbManager.pushToNewSession(xCord, yCord, didCollide);
     index++;
   }
 }
@@ -79,7 +81,7 @@ function sendRandomPosToOldSession() {
     } else if (xCord < 255) {
       yCord = 254;
     }
-    dbHandler.continueSession(xCord, yCord, didCollide);
+    dbManager.pushToNewSession(xCord, yCord, didCollide);
     index++;
   }
 }

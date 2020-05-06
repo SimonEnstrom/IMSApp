@@ -24,6 +24,7 @@ import Svg, {
 } from 'react-native-svg';
 
 import dbHandler from '../Source/backend-handler';
+import dbManager from '../Source/db-manager';
 
 class MapActivity extends React.Component {
   static navigationOptions = {
@@ -57,30 +58,24 @@ class MapActivity extends React.Component {
   }
 }
 function getPath() {
-  console.log('Importing path');
-  const arr = dbHandler.retriveData();
-  let sessionIndex = arr.length - 1; // Get latest path in DB.
-  console.log('Session index: ', sessionIndex);
-  if (sessionIndex < 0) {
-    sessionIndex = 0;
+  const arr = dbManager.getLastSessionPath();
+  let index = arr.length - 1;
+  if (index < 0) {
+    index = 0;
   }
   try {
-    const positionArr = arr[sessionIndex].location;
     let xCord;
     let yCord;
     let colArr = [];
     let path = '';
 
-    for (let i = 0; i < positionArr.length; i++) {
-      let partialString = '';
-      xCord = positionArr[i].xValue;
-      yCord = positionArr[i].yValue;
-
-      partialString = xCord + ',' + yCord + ' ';
-
-      colArr.push(positionArr[i].didCollide);
-
-      path += partialString;
+    for (let i = 0; i < index; i++) {
+      let point = '';
+      xCord = arr[i].x;
+      yCord = arr[i].y;
+      point = xCord + ',' + yCord + ' ';
+      colArr.push(arr[i].didCollide);
+      path += point;
     }
     console.log('path: ', path);
     return path;
