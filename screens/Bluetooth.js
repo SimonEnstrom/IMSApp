@@ -270,7 +270,6 @@ class BluetoothActivity extends React.Component {
                 renderItem={({ item }) => this.renderItem(item) }
                 keyExtractor={item => item.id}
                 />
-
             </ScrollView>
             </View>
         </SafeAreaView>

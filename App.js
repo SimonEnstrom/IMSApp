@@ -10,9 +10,11 @@ import DataActivity from './screens/Data';
 import MapActivity from './screens/Map';
 import BluetoothActivity from './screens/Bluetooth';
 import PlaybotActivity from './screens/playbot';
+import SessionsActivity from './screens/Sessions';
 global.direction = 0;
 global.autonomous = 0;
 global.mode = 1;
+global.sessionsKey = null;
 const RootStack = createStackNavigator(
   {
     Home: {screen: HomeActivity},
@@ -22,6 +24,7 @@ const RootStack = createStackNavigator(
     Map: {screen: MapActivity},
     Playbot: {screen: PlaybotActivity},
     Bluetooth: {screen: BluetoothActivity},
+    Sessions: {screen: SessionsActivity},
   },
   {
     initialRouteName: 'Home',
