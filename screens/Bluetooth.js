@@ -16,6 +16,7 @@ TouchableHighlight,
 } from 'react-native';
 
 import BleManager from 'react-native-ble-manager';
+import db
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -118,9 +119,12 @@ class BluetoothActivity extends React.Component {
 
             console.log('Received data from ' + data.peripheral + ' characteristic ' + data.characteristic, data.value);
             console.log("NÅT LÅNGT I CAPS TYP" + global.direction);
-            BleManager.write(peripheral.id, '0000ffe1-0000-1000-8000-00805f9b34fb', crustCharacteristic, [1, global.mode, global.direction, 1, 1, 1], 6).then(() => {
+            BleManager.write(peripheral.id, '0000ffe1-0000-1000-8000-00805f9b34fb', crustCharacteristic, [1, global.mode, global.direction, global.xCoord, global.yCoord, globla.collision], 6).then(() => {
                 console.log('DATA SENT: DIRECTION: ' + global.direction + ' AND MODE: ' + global.mode);
             });
+            if(global.Collision){
+
+            }
         }, 900);
     }
 
