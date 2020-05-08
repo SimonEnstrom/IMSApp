@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
-import dbHandler from '../Source/backend-handler';
 import dbManager from '../Source/db-manager';
 class PlaybotActivity extends React.Component {
   static navigationOptions = {
@@ -81,7 +80,7 @@ function sendRandomPosToOldSession() {
     } else if (xCord < 255) {
       yCord = 254;
     }
-    dbManager.pushToNewSession(xCord, yCord, didCollide);
+    dbManager.pushToLatestSession(xCord, yCord, didCollide);
     index++;
   }
 }

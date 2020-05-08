@@ -1,29 +1,7 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import Svg, {
-  Circle,
-  Ellipse,
-  G,
-  TSpan,
-  TextPath,
-  Path,
-  Polygon,
-  Polyline,
-  Line,
-  Rect,
-  Use,
-  Image,
-  Symbol,
-  Defs,
-  LinearGradient,
-  RadialGradient,
-  Stop,
-  ClipPath,
-  Pattern,
-  Mask,
-} from 'react-native-svg';
+import React, {Component} from 'react';
+import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import Svg, {Polyline} from 'react-native-svg';
 
-import dbHandler from '../Source/backend-handler';
 import dbManager from '../Source/db-manager';
 
 class MapActivity extends React.Component {
@@ -34,7 +12,6 @@ class MapActivity extends React.Component {
     },
   };
   render() {
-  
     return (
       <View style={styles.container}>
         <Text style={styles.headerText}> Go Back </Text>
@@ -47,7 +24,12 @@ class MapActivity extends React.Component {
             title="Sessions"
             onPress={() => this.props.navigation.navigate('Sessions')}
           />
-          <Button title="Import path" onPress={() => {getPath(global.sessionsKey), this.forceUpdate()}} />
+          <Button
+            title="Import path"
+            onPress={() => {
+              getPath(global.sessionsKey), this.forceUpdate();
+            }}
+          />
           <Svg height="80%" width="90%" viewBox="0 0 254 254">
             <Polyline
               points={getPath(global.sessionsKey)}
@@ -63,10 +45,9 @@ class MapActivity extends React.Component {
 }
 
 function getPath(key) {
-
   var arr;
   if (key) {
-    arr = dbManager.getOtherSession(key)
+    arr = dbManager.getOtherSession(key);
   } else {
     arr = dbManager.getLastSessionPath();
   }
@@ -93,7 +74,6 @@ function getPath(key) {
   } catch (error) {
     console.log('Error creating path: ', error);
   }
-
 }
 
 const styles = StyleSheet.create({
