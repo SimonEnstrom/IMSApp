@@ -14,6 +14,9 @@ import SessionsActivity from './screens/Sessions';
 global.direction = 0;
 global.autonomous = 0;
 global.mode = 1;
+global.xCoord = 0;
+global.Coord = 0;
+global.collision = 0;
 global.sessionsKey = null;
 const RootStack = createStackNavigator(
   {
