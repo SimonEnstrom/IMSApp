@@ -57,13 +57,10 @@ class ManualDriveActivity extends React.Component {
     render() {
     return (
     <View style={styles.buttonContainer}>
-        <Text style={styles.headerText}>Manual Drive Buttons k</Text>
-        <Button style={{width: "100%"}}
-        title={global.mode ? 'on k' : 'off '}
-        onPress={() => {
-            this.toggleMode(), this.forceUpdate()
-        }} 
-        />
+        <View style={{margin: 10, width: "50%"}} >
+        <Button color='#273a60' title={global.mode ? 'on ' : 'off '} onPress={() => {this.toggleMode(), this.forceUpdate()}} />
+        </View>
+        
         
         <View style={styles.manUp}>
         <TouchableOpacity onPressIn={this.handleUp} onPressOut={this.handleRelease}>

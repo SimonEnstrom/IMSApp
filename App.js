@@ -30,7 +30,7 @@ const RootStack = createStackNavigator(
     Sessions: {screen: SessionsActivity},
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Bluetooth',
   },
 );
 console.disableYellowBox = true;
