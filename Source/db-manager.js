@@ -12,7 +12,7 @@ if (!firebase.apps.length) {
 }
 let sessionRef = getCurrentDateTime();
 // Returns all Sessions keys
-// Ex keys[0] = 2020-4-29 13:26:54
+// Ex keys[0] = 2020-04-29 13:26:54
 function getSessions() {
   var database = firebase.database().ref('/Sessions');
   let keys = [];
