@@ -18,7 +18,7 @@ class ManualDriveActivity extends React.Component {
         this.handleLeft = this.handleLeft.bind(this);
         this.handleRight = this.handleRight.bind(this);
         this.handleRelease = this.handleRelease.bind(this);
-        this.toogleMode = this.toggleMode.bind(this);
+        this.toggleMode = this.toggleMode.bind(this);
     }
 
 
@@ -58,9 +58,11 @@ class ManualDriveActivity extends React.Component {
     return (
     <View style={styles.buttonContainer}>
         <Text style={styles.headerText}>Manual Drive Buttons k</Text>
-        <Button
-        title={global.mode ? 'on' : 'off'}
-        onPress={this.toogleMode} 
+        <Button style={{width: "100%"}}
+        title={global.mode ? 'on k' : 'off '}
+        onPress={() => {
+            this.toggleMode(), this.forceUpdate()
+        }} 
         />
         
         <View style={styles.manUp}>
