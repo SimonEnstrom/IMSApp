@@ -48,7 +48,7 @@ class ManualDriveActivity extends React.Component {
     }
 
     toggleMode() {
-        console.log(global.mode)
+        console.log(global.mode);
         if(global.mode == 1) {
             global.mode = 0;
         }else {global.mode = 1;}

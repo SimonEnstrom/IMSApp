@@ -23,15 +23,11 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 class BluetoothActivity extends React.Component {
   static navigationOptions = {
-    title: 'Bluetooth',
+    title: "Bluetooth",
     headerStyle: {
-      backgroundColor: '#03A9F4',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-  };
+        backgroundColor: "#73C6B6"
+    }
+};
 
   constructor() {
     super();
@@ -157,7 +153,7 @@ class BluetoothActivity extends React.Component {
           global.direction,
           global.xCoord,
           global.yCoord,
-          globla.collision,
+          global.collision,
         ],
         6,
       ).then(() => {
@@ -215,8 +211,7 @@ class BluetoothActivity extends React.Component {
       peripheral.id,
       service,
       crustCharacteristic,
-      [1, 1, 1, 1, 1, 1],
-      10,
+      [1, 1, 1, 1, 1, 1], 10,
     ).then(() => {
       console.log('Writed to robot');
     });
@@ -307,7 +302,7 @@ class BluetoothActivity extends React.Component {
   }
 
   renderItem(item) {
-    const color = item.connected ? 'green' : '#fff';
+    const color = item.connected ? '#273a60' : 'white';
     return (
       <TouchableHighlight onPress={() => this.test(item)}>
         <View style={[styles.row, {backgroundColor: color}]}>
@@ -352,17 +347,17 @@ class BluetoothActivity extends React.Component {
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
           <View style={{margin: 10}}>
-            <Button title={btnScanTitle} onPress={() => this.startScan()} />
+            <Button color='#273a60' title={btnScanTitle} onPress={() => this.startScan()} />
           </View>
 
           <View style={{margin: 10}}>
-            <Button
+            <Button color='#273a60'
               title="Retrieve connected peripherals"
               onPress={() => this.retrieveConnected()}
             />
           </View>
           <View>
-            <Button
+            <Button color='#273a60'
               title="Manual drive"
               onPress={() => this.props.navigation.navigate('ManualDrive')}
             />
@@ -390,7 +385,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
+    width: "100%"
   },
   headerText: {
     fontSize: 20,
@@ -398,6 +394,10 @@ const styles = StyleSheet.create({
     margin: 10,
     fontWeight: 'bold',
   },
+  scroll: {
+    width: "100%",
+    backgroundColor: "white"
+  }
 });
 export default BluetoothActivity;
 //I'm in!! //Joacim

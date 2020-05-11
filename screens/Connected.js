@@ -10,31 +10,24 @@ class ConnectActivity extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.headerText}>Go to map</Text>
-        <Button
-          title="map"
-          onPress={() => this.props.navigation.navigate('Map')}
-        />
-        <Text style={styles.headerText}> manual drive </Text>
-        <Button
-          title="manual drive"
-          onPress={() => this.props.navigation.navigate('ManualDrive')}
-        />
-        <Text style={styles.headerText}> Go to data </Text>
-        <Button
-          title="data"
-          onPress={() => this.props.navigation.navigate('Data')}
-        />
-        <Text style={styles.headerText}> Go to Playbot </Text>
-        <Button
-          title="playbot"
-          onPress={() => this.props.navigation.navigate('Playbot')}
-        />
-        <Text style={styles.headerText}> Go to Bluetooth </Text>
-        <Button
-          title="bluetooth"
-          onPress={() => this.props.navigation.navigate('Bluetooth')}
-        />
+        <View style={styles.button}>
+          <Button
+            title="map"
+            onPress={() => this.props.navigation.navigate('Map')}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            title="data"
+            onPress={() => this.props.navigation.navigate('Data')}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button 
+            title="bluetooth"
+            onPress={() => this.props.navigation.navigate('Bluetooth')}
+          />
+        </View>
       </View>
     );
   }
@@ -44,7 +37,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'yellow',
   },
   headerText: {
     fontSize: 20,
@@ -52,5 +45,10 @@ const styles = StyleSheet.create({
     margin: 10,
     fontWeight: 'bold',
   },
+  button: {
+    margin: "10%",
+    width: "50%",
+    backgroundColor: 'red'
+  }
 });
 export default ConnectActivity;
