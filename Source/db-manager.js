@@ -122,13 +122,28 @@ const publics = {
   },
 };
 
-// Retruns a string of current dateTime YYYY-(M)M-(D)D HH:MM:SS
+// Retruns a string of current dateTime YYYY-MM-DD HH:MM:SS
 function getCurrentDateTime() {
   var today = new Date();
-  var date =
-    today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-  var time =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+  var y = today.getFullYear(),
+    m,
+    d,
+    h,
+    min,
+    sec;
+  m = today.getMonth() + 1;
+  d = today.getDate();
+  h = today.getHours();
+  min = today.getMinutes();
+  sec = today.getSeconds();
+  m = m > 9 ? m : '0' + m;
+  d = d > 9 ? d : '0' + d;
+  h = h > 9 ? h : '0' + h;
+  min = min > 9 ? min : '0' + min;
+  sec = sec > 9 ? sec : '0' + sec;
+  console.log('m = ', m);
+  var date = y + '-' + m + '-' + d;
+  var time = h + ':' + min + ':' + sec;
   var dateTime = date + ' ' + time;
   return dateTime;
 }
