@@ -86,3 +86,11 @@ nothing to commit, working tree clean
 
 ~git pull <remote> <branch>
 Ex: git pull origin mergebranch
+
+TODO:
+// Rezise the viewbox based on how big the mower driving area is? Alt increse X/Y for points.  
+// Dont show collision dots if we are driving manually? * DONE
+// Store manually driving positions. * Backendpart DONE
+// Remove backend handler and playbot. 
+// Write out what the red dot in map means. 
+// If there is no collisions, a dot at 0,0 appears? 

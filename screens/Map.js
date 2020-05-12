@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
-import Svg, {Polyline} from 'react-native-svg';
+import Svg, {Circle, Polyline, Defs, Marker} from 'react-native-svg';
 
 import dbManager from '../Source/db-manager';
+var collisions = '';
+var path = '';
+setPath('');
 
 class MapActivity extends React.Component {
   static navigationOptions = {
@@ -14,28 +17,49 @@ class MapActivity extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.headerText}> Go Back </Text>
         <View style={[StyleSheet.absoluteFill, styles.svgContainer]}>
-          <Button
-            title="Go Back"
-            onPress={() => this.props.navigation.goBack()}
-          />
-          <Button
-            title="Sessions"
-            onPress={() => this.props.navigation.navigate('Sessions')}
-          />
-          <Button
-            title="Import path"
-            onPress={() => {
-              getPath(global.sessionsKey), this.forceUpdate();
-            }}
-          />
+          <View style={{margin: 10, width: '50%'}}>
+            <Button
+              color="#273a60"
+              title="Sessions"
+              onPress={() => this.props.navigation.navigate('Sessions')}
+            />
+          </View>
+          <View style={{margin: 10, width: '50%'}}>
+            <Button
+              color="#273a60"
+              title="Import path"
+              onPress={() => {
+                setPath(global.sessionsKey), this.forceUpdate();
+              }}
+            />
+          </View>
           <Svg height="80%" width="90%" viewBox="0 0 254 254">
+            <Defs>
+              <Marker
+                id="dot"
+                viewBox="0 0 10 10"
+                refX="0"
+                refY="0"
+                markerWidth="2"
+                markerHeight="2">
+                <Circle cx="0" cy="0" r="5" fill="red" />
+              </Marker>
+            </Defs>
+
             <Polyline
-              points={getPath(global.sessionsKey)}
+              id="line"
+              points={getPath()}
               fill="none"
               stroke="black"
               strokeWidth="3"
+            />
+            <Polyline
+              id="collision"
+              points={getCols()}
+              fill="none"
+              strokeWidth="3"
+              marker="url(#dot)"
             />
           </Svg>
         </View>
@@ -44,36 +68,44 @@ class MapActivity extends React.Component {
   }
 }
 
-function getPath(key) {
+function setPath(key) {
   var arr;
   if (key) {
     arr = dbManager.getOtherSession(key);
   } else {
     arr = dbManager.getLastSessionPath();
   }
-  let index = arr.length - 1;
-  if (index < 0) {
-    index = 0;
-  }
   try {
-    let xCord;
-    let yCord;
-    let colArr = [];
-    let path = '';
+    let lPath = '';
 
-    for (let i = 0; i < index; i++) {
-      let point = '';
-      xCord = arr[i].x;
-      yCord = arr[i].y;
-      point = xCord + ',' + yCord + ' ';
-      colArr.push(arr[i].didCollide);
-      path += point;
+    for (i in arr) {
+      lPath += pointToString(arr[i]);
     }
-    console.log('path: ', path);
-    return path;
+    setCollisions(arr);
+    path = lPath;
   } catch (error) {
     console.log('Error creating path: ', error);
   }
+}
+function pointToString(point) {
+  var pString = point.x + ',' + point.y + ' ';
+  return pString;
+}
+function setCollisions(arr) {
+  collisions = '';
+  for (p in arr) {
+    if (arr[p].didCollide) {
+      collisions += arr[p].x + ',' + arr[p].y + ' ';
+    }
+  }
+}
+function getPath() {
+  if (path == '') setPath(global.sessionsKey);
+  return path;
+}
+function getCols() {
+  console.log('Cols: ', collisions);
+  return collisions;
 }
 
 const styles = StyleSheet.create({

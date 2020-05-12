@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import localStorage from '../Source/localStorage';
 
 var config = {
   databaseURL: 'https://ims-app-40ecf.firebaseio.com',
@@ -24,7 +25,7 @@ function getSessions() {
   return keys;
 }
 //Returns an array with all points under a session key
-//Ex points[0] = {x: 127, y: 219, didCollide: false}
+//Ex points[0] = {x: 127, y: 127, didCollide: false}
 function getData(keyRef) {
   const ref = '/Sessions/' + keyRef;
   var database = firebase.database().ref(ref);
@@ -39,7 +40,6 @@ function getData(keyRef) {
       points.push(point);
     });
   });
-  console.log(points[0]);
   return points;
 }
 // Stroing under the the global variabel sessionRef.
@@ -47,6 +47,14 @@ function getData(keyRef) {
 // before ever using this function
 function pushToNewSession(x, y, didCollide) {
   let ref = '/Sessions/' + sessionRef;
+  var point = {
+    x: x,
+    y: y,
+    didCollide: didCollide,
+  };
+
+  localStorage.update(point);
+
   firebase
     .database()
     .ref(ref)
@@ -125,12 +133,8 @@ const publics = {
 // Retruns a string of current dateTime YYYY-MM-DD HH:MM:SS
 function getCurrentDateTime() {
   var today = new Date();
-  var y = today.getFullYear(),
-    m,
-    d,
-    h,
-    min,
-    sec;
+  var y, m, d, h, min, sec;
+  y = today.getFullYear();
   m = today.getMonth() + 1;
   d = today.getDate();
   h = today.getHours();

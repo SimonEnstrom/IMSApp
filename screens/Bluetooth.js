@@ -23,15 +23,11 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 class BluetoothActivity extends React.Component {
   static navigationOptions = {
-    title: 'Bluetooth',
+    title: "Bluetooth",
     headerStyle: {
-      backgroundColor: '#03A9F4',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-  };
+        backgroundColor: "#73C6B6"
+    }
+};
 
   constructor() {
     super();
@@ -157,7 +153,7 @@ class BluetoothActivity extends React.Component {
           global.direction,
           global.xCoord,
           global.yCoord,
-          globla.collision,
+          global.collision,
         ],
         6,
       ).then(() => {
@@ -167,9 +163,14 @@ class BluetoothActivity extends React.Component {
             ' AND MODE: ' +
             global.mode,
         );
+          setTimeout(() => {
+            if (data.value[5]) {
+              console.log("Data pushed to database + data: ", data.value);
+              dbManager.pushToNewSession(data.value[3], data.value[4], data.value[5]);  
+            }
+          }, 10000);
       });
-      if (global.Collision) {
-      }
+      
     }, 900);
   }
 
@@ -215,8 +216,7 @@ class BluetoothActivity extends React.Component {
       peripheral.id,
       service,
       crustCharacteristic,
-      [1, 1, 1, 1, 1, 1],
-      10,
+      [1, 1, 1, 1, 1, 1], 10,
     ).then(() => {
       console.log('Writed to robot');
     });
@@ -251,7 +251,10 @@ class BluetoothActivity extends React.Component {
               });
             }
             console.log('Connected to ' + peripheral.id);
-
+            //New session
+            dbManager.startNewSession();
+            dbManager.pushToNewSession(127, 127, 0)
+            console.log("NEW SESSION STARTED==========================================================================================================================================================================================================================================================================================================");
             setTimeout(() => {
               BleManager.retrieveServices(peripheral.id).then(
                 peripheralInfo => {
@@ -307,15 +310,17 @@ class BluetoothActivity extends React.Component {
   }
 
   renderItem(item) {
-    const color = item.connected ? 'green' : '#fff';
+    const color = item.connected ? '#273a60' : 'white';
+    const textColor = item.connected ? 'white' : 'black';
     return (
+      
       <TouchableHighlight onPress={() => this.test(item)}>
         <View style={[styles.row, {backgroundColor: color}]}>
           <Text
             style={{
               fontSize: 12,
               textAlign: 'center',
-              color: '#333333',
+              color: textColor,
               padding: 10,
             }}>
             {item.name}
@@ -324,7 +329,7 @@ class BluetoothActivity extends React.Component {
             style={{
               fontSize: 10,
               textAlign: 'center',
-              color: '#333333',
+              color: textColor,
               padding: 2,
             }}>
             RSSI: {item.rssi}
@@ -333,7 +338,7 @@ class BluetoothActivity extends React.Component {
             style={{
               fontSize: 8,
               textAlign: 'center',
-              color: '#333333',
+              color: textColor,
               padding: 2,
               paddingBottom: 20,
             }}>
@@ -347,25 +352,18 @@ class BluetoothActivity extends React.Component {
   render() {
     const list = Array.from(this.state.peripherals.values());
     const btnScanTitle =
-      'Scan Bluetooth (' + (this.state.scanning ? 'on' : 'off') + ')';
+      'Scan Bluetooth ' + (this.state.scanning ? '(scanning)' : '');
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
-          <View style={{margin: 10}}>
-            <Button title={btnScanTitle} onPress={() => this.startScan()} />
+          <View style={{margin: 10, width: "50%"}}>
+            <Button color='#273a60' title={btnScanTitle} onPress={() => this.startScan()} />
           </View>
-
-          <View style={{margin: 10}}>
-            <Button
-              title="Retrieve connected peripherals"
-              onPress={() => this.retrieveConnected()}
-            />
+          <View style={{margin: 10, width: "50%"}}>
+            <Button color='#273a60' title="Map" onPress={() => this.props.navigation.navigate('Map')} />
           </View>
-          <View>
-            <Button
-              title="Manual drive"
-              onPress={() => this.props.navigation.navigate('ManualDrive')}
-            />
+          <View style={{margin: 10, width: "50%"}}>
+            <Button color='#273a60' title="Manual drive" onPress={() => this.props.navigation.navigate('ManualDrive')} />
           </View>
 
           <ScrollView style={styles.scroll}>
@@ -390,7 +388,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
+    width: "100%"
   },
   headerText: {
     fontSize: 20,
@@ -398,6 +397,10 @@ const styles = StyleSheet.create({
     margin: 10,
     fontWeight: 'bold',
   },
+  scroll: {
+    width: "100%",
+    backgroundColor: "white"
+  }
 });
 export default BluetoothActivity;
 //I'm in!! //Joacim
