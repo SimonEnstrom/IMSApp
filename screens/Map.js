@@ -104,7 +104,8 @@ function getPath() {
   return path;
 }
 function getCols() {
-  console.log('Cols: ', collisions);
+  var outsideScreen = '-5, -5';
+  collisions = collisions != '' ? collisions : outsideScreen;
   return collisions;
 }
 
