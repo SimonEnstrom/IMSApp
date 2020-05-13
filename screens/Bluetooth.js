@@ -130,6 +130,7 @@ class BluetoothActivity extends React.Component {
   }
 
   handleUpdateValueForCharacteristic(data) {
+    var released = true;
     setTimeout(() => {
       let peripherals = this.state.peripherals;
       let peripheral = peripherals.get(data.peripheral);
@@ -163,10 +164,15 @@ class BluetoothActivity extends React.Component {
             ' AND MODE: ' +
             global.mode,
         );
+        if(global.direction == 0 && global.mode == 0 && global.relese == true){
+          console.log("Data pushed to database + GJRKEPÄHTJSIOHBDAJKHLÅEJHIOPÅERAHGJDIAPÅGREJOPÅHDJAIHGOÅREAJHITPESÅHJKADÄHJTETRAKIPÅHAdata: ", data.value);
+          dbManager.pushToNewSession(data.value[3], data.value[4], data.value[5]); 
+          global.relese = false;
+        } 
           setTimeout(() => {
             if (data.value[5]) {
               console.log("Data pushed to database + data: ", data.value);
-              dbManager.pushToNewSession(data.value[3], data.value[4], data.value[5]);  
+              dbManager.pushToNewSession(data.value[3], data.value[4], data. value[5]);  
             }
           }, 10000);
       });
@@ -235,10 +241,33 @@ class BluetoothActivity extends React.Component {
   }
 
   test(peripheral) {
+    var crustCharacteristic = '0000ffe3-0000-1000-8000-00805f9b34fb';
     if (peripheral) {
       if (peripheral.connected) {
+        BleManager.write(
+          peripheral.id,
+          '0000ffe1-0000-1000-8000-00805f9b34fb',
+          crustCharacteristic,
+          [
+            1,
+            0,
+            0,
+            global.xCoord,
+            global.yCoord,
+            global.collision,
+          ],
+          6,
+        ).then(() => {
+          console.log(
+            'DATA SENT: DIRECTION: ' +
+              global.direction +
+              ' AND MODE: ' +
+              global.mode,
+          );
         BleManager.disconnect(peripheral.id);
-      } else {
+        console.log("disconnected from" + peripheral.id);
+          })
+        } else {
         BleManager.connect(peripheral.id)
           .then(() => {
             let peripherals = this.state.peripherals;

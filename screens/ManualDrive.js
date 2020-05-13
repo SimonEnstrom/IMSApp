@@ -45,6 +45,7 @@ class ManualDriveActivity extends React.Component {
     handleRelease() {
         global.direction = 0;
         console.log("release");
+        global.relese = true;
     }
 
     toggleMode() {

@@ -18,6 +18,7 @@ global.xCoord = 0;
 global.yCoord = 0;
 global.collision = 0;
 global.sessionsKey = null;
+global.relese = false;
 const RootStack = createStackNavigator(
   {
     Home: {screen: HomeActivity},
