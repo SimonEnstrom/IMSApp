@@ -23,7 +23,7 @@ class ConnectActivity extends React.Component {
           />
         </View>
         <View style={styles.button}>
-          <Button 
+          <Button
             title="bluetooth"
             onPress={() => this.props.navigation.navigate('Bluetooth')}
           />
@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   button: {
-    margin: "10%",
-    width: "50%",
-    backgroundColor: 'red'
-  }
+    margin: '10%',
+    width: '50%',
+    backgroundColor: 'red',
+  },
 });
 export default ConnectActivity;

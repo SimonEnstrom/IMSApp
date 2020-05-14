@@ -12,6 +12,7 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
 let sessionRef = getCurrentDateTime();
+let localStorageId = 1;
 // Returns all Sessions keys
 // Ex keys[0] = 2020-04-29 13:26:54
 function getSessions() {
@@ -47,14 +48,8 @@ function getData(keyRef) {
 // before ever using this function
 function pushToNewSession(x, y, didCollide) {
   let ref = '/Sessions/' + sessionRef;
-  var point = {
-    x: x,
-    y: y,
-    didCollide: didCollide,
-  };
-
-  localStorage.update(point);
-
+  localStorage.storePoint(sessionRef, x, y, didCollide, localStorageId);
+  localStorageId++;
   firebase
     .database()
     .ref(ref)
@@ -75,6 +70,7 @@ function pushToNewSession(x, y, didCollide) {
 // Pushes new positions under the last session created.
 function pushToLatestSession(x, y, didCollide) {
   let lastSession = getLastSessionKey();
+  localStorage.retreiveSession(sessionRef);
   let ref = '/Sessions/' + lastSession;
   firebase
     .database()
@@ -102,8 +98,8 @@ function getLastSessionKey() {
 
 const publics = {
   tester: function() {
-    let keys = getSessions();
-    console.log(keys);
+    localStorage.retreiveSession(sessionRef);
+    console.log('Running storage from db-manager: ');
   },
   getLastSessionPath: function() {
     let key = getLastSessionKey();
@@ -121,6 +117,7 @@ const publics = {
   //Sets the global variabel sessionRef to dateTime
   startNewSession: function() {
     sessionRef = getCurrentDateTime();
+    localStorageId = 1;
   },
   pushToLatestSession: function(x, y, didCollide) {
     pushToLatestSession(x, y, didCollide);

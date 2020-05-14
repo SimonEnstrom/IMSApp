@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 import Svg, {Circle, Polyline, Defs, Marker} from 'react-native-svg';
+import localStorage from '../Source/localStorage';
 
 import dbManager from '../Source/db-manager';
 var collisions = '';
@@ -56,7 +57,7 @@ class MapActivity extends React.Component {
             />
             <Polyline
               id="collision"
-              points={getCols()}
+              points={getCollisions()}
               fill="none"
               strokeWidth="3"
               marker="url(#dot)"
@@ -75,9 +76,11 @@ function setPath(key) {
   } else {
     arr = dbManager.getLastSessionPath();
   }
+  if (!arr) {
+    arr = getPointsFromLocal(global.sessionsKey);
+  }
   try {
     let lPath = '';
-
     for (i in arr) {
       lPath += pointToString(arr[i]);
     }
@@ -86,10 +89,6 @@ function setPath(key) {
   } catch (error) {
     console.log('Error creating path: ', error);
   }
-}
-function pointToString(point) {
-  var pString = point.x + ',' + point.y + ' ';
-  return pString;
 }
 function setCollisions(arr) {
   collisions = '';
@@ -103,10 +102,17 @@ function getPath() {
   if (path == '') setPath(global.sessionsKey);
   return path;
 }
-function getCols() {
+function getCollisions() {
   var outsideScreen = '-5, -5';
   collisions = collisions != '' ? collisions : outsideScreen;
   return collisions;
+}
+function pointToString(point) {
+  var pString = point.x + ',' + point.y + ' ';
+  return pString;
+}
+function getPointsFromLocal(key) {
+  return localStorage.retreiveSession(key);
 }
 
 const styles = StyleSheet.create({
