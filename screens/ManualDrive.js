@@ -21,33 +21,33 @@ class ManualDriveActivity extends React.Component {
         this.toggleMode = this.toggleMode.bind(this);
     }
 
-
+    //Up button pressed
     handleUp() {
         global.direction = 1;
-        console.log("up");
     }
 
+    //Down button pressed
     handleDown() {
         global.direction = 2;
-        console.log("down");
     }
 
+    //Left button pressed
     handleLeft() {
         global.direction = 4;
-        console.log("left");
     }
     
+    //Right button pressed
     handleRight() {
         global.direction = 3;
-        console.log("right");
     }
 
+    //Button released
     handleRelease() {
         global.direction = 0;
-        console.log("release");
         global.relese = true;
     }
 
+    //Toggle manual drive button pressed
     toggleMode() {
         console.log(global.mode);
         if(global.mode == 1) {
@@ -55,29 +55,31 @@ class ManualDriveActivity extends React.Component {
         }else {global.mode = 1;}
     }
 
+    //Renders screen
     render() {
     return (
     <View style={styles.buttonContainer}>
+        {/* Manual Drive button */}
         <View style={{margin: 10, width: "50%"}} >
         <Button color='#273a60' title={"turn " +  (global.mode ? 'on ' : 'off ') + "manual mode"} onPress={() => {this.toggleMode(), this.forceUpdate()}} />
         </View>
         
-        
+        {/* Up button */}
         <View style={styles.manUp}>
         <TouchableOpacity onPressIn={this.handleUp} onPressOut={this.handleRelease}>
                 <Image source={require('../img/ManButton.png')} />
             </TouchableOpacity>
         </View>
-        {/* Left */}
+        {/* Left button */}
         <View style={styles.middleRow}>
             <View style={styles.manLeft}>
                 <TouchableOpacity onPressIn={this.handleLeft} onPressOut={this.handleRelease}>
                     <Image source={require('../img/ManButton.png')} />
                 </TouchableOpacity>
             </View>
-            {/* Middle */}
+            {/* Middle blank */}
             <View style={styles.manMiddle}></View>
-            {/* Right */}
+            {/* Right button */}
             <View style={styles.manRight}>
                 <TouchableOpacity onPressIn={this.handleRight} onPressOut={this.handleRelease}>
                     <Image source={require('../img/ManButton.png')} />
@@ -85,7 +87,7 @@ class ManualDriveActivity extends React.Component {
             </View>
         </View>
 
-        {/* Down */}
+        {/* Down button */}
         <View style={styles.manDown}>
             <TouchableOpacity onPressIn={this.handleDown} onPressOut={this.handleRelease}>
                 <Image source={require('../img/ManButton.png')} />
@@ -94,6 +96,8 @@ class ManualDriveActivity extends React.Component {
     </View>
     );}
 }
+
+//Styling
 const styles = StyleSheet.create({
     container: {
         flex: 1,

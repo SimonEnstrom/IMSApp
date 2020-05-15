@@ -15,6 +15,7 @@ class SessionsActivity extends React.Component {
         }
     };
 
+    //Renders each item in list of sessions
     renderItem(item) {
         return (
             <TouchableHighlight onPress={() => this.test(item)}>
@@ -25,6 +26,7 @@ class SessionsActivity extends React.Component {
         );
     }
 
+    //Renders screen
     render() {
         return (
             <View style={styles.container}>
@@ -42,6 +44,8 @@ class SessionsActivity extends React.Component {
         );
     }
 }
+
+//Styling
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -53,8 +57,5 @@ const styles = StyleSheet.create({
         height: 44,
     },
 });
-
-
-
 
 export default SessionsActivity;
