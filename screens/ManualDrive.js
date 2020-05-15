@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 class ManualDriveActivity extends React.Component {
     static navigationOptions = {
-        title: "ManualDrive",
+        title: "Drive",
         headerStyle: {
             backgroundColor: "#73C6B6"
         }
@@ -59,7 +59,7 @@ class ManualDriveActivity extends React.Component {
     return (
     <View style={styles.buttonContainer}>
         <View style={{margin: 10, width: "50%"}} >
-        <Button color='#273a60' title={global.mode ? 'on ' : 'off '} onPress={() => {this.toggleMode(), this.forceUpdate()}} />
+        <Button color='#273a60' title={"turn " +  (global.mode ? 'on ' : 'off ') + "manual mode"} onPress={() => {this.toggleMode(), this.forceUpdate()}} />
         </View>
         
         

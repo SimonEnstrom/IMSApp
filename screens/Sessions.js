@@ -32,7 +32,7 @@ class SessionsActivity extends React.Component {
                     data={
                         dbManager.getAllSession()
                     }
-                    renderItem={({ item }) => <TouchableOpacity onPressIn={() => global.sessionsKey = item}  onPressOut={() => this.props.navigation.navigate('Map')} style={styles.item}>
+                    renderItem={({ item }) => <TouchableOpacity onPressIn={() => global.sessionsKey = item} onPressOut={() => this.props.navigation.navigate('Map')} style={styles.item}>
                         <Text>{item}</Text>
                     </TouchableOpacity>}
                 />

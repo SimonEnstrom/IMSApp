@@ -392,7 +392,7 @@ class BluetoothActivity extends React.Component {
             <Button color='#273a60' title="Map" onPress={() => this.props.navigation.navigate('Map')} />
           </View>
           <View style={{margin: 10, width: "50%"}}>
-            <Button color='#273a60' title="Manual drive" onPress={() => this.props.navigation.navigate('ManualDrive')} />
+            <Button color='#273a60' title="Drive" onPress={() => this.props.navigation.navigate('ManualDrive')} />
           </View>
 
           <ScrollView style={styles.scroll}>
