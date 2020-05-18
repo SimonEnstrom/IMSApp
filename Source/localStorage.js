@@ -1,6 +1,8 @@
 import {AsyncStorage} from 'react-native';
 import Storage from 'react-native-storage';
 
+var standardKey = 'askgjal';
+
 const storage = new Storage({
   // maximum capacity, default 1000 key-ids
   size: 1000,
@@ -25,9 +27,6 @@ const storage = new Storage({
 });
 
 function savePoint(key, point, id) {
-  console.log(
-    'Saving point key / point / id' + key + ' / ' + point + ' / ' + id,
-  );
   storage.save({
     key: key,
     id: id,
@@ -37,6 +36,17 @@ function savePoint(key, point, id) {
 function clearStorage() {
   storage.clearMap();
 }
+function getLastId(key) {
+  storage.getIdsForKey(key).then(ids => {
+    return ids[ids.size - 1];
+  });
+}
+function storeLastKey(keyValue) {
+  storage.save({
+    key: standardKey,
+    data: keyValue,
+  });
+}
 
 const exp = {
   storePoint: function(key, xin, yin, didCollidein, id) {
@@ -45,16 +55,38 @@ const exp = {
       y: yin,
       didCollide: didCollidein,
     };
-    console.log('savePoint(lsR, value)', point);
     savePoint(key, point, id);
   },
-  retreiveSession: function(key) {
-    storage.getAllDataForKey(key).then(points => {
-      return points;
-    });
+  retreiveSession: function(key, callback) {
+    storage
+      .getAllDataForKey(key)
+      .then(points => {
+        callback(points);
+      })
+      .catch(error => {
+        console.log('Error fetching local data: ', error);
+      });
+  },
+  getNextId: function(key) {
+    return getLastId(key) + 1;
   },
   clearAllData: function() {
     clearStorage();
+  },
+  saveLastKey: function(keyToSave) {
+    storeLastKey(keyToSave);
+  },
+  getLastKey: function(callback) {
+    storage
+      .load({
+        key: standardKey,
+      })
+      .then(result => {
+        callback(result);
+      })
+      .catch(error => {
+        console.log('Error retreiving last key used: ', error);
+      });
   },
 };
 

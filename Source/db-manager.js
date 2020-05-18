@@ -1,4 +1,3 @@
-import React from 'react';
 import firebase from 'firebase';
 import localStorage from '../Source/localStorage';
 
@@ -8,7 +7,6 @@ var config = {
 };
 // If there is no initialized connecting to firebase we make one.
 if (!firebase.apps.length) {
-  console.log('Initialiazing firebase config');
   firebase.initializeApp(config);
 }
 let sessionRef = getCurrentDateTime();
@@ -70,7 +68,9 @@ function pushToNewSession(x, y, didCollide) {
 // Pushes new positions under the last session created.
 function pushToLatestSession(x, y, didCollide) {
   let lastSession = getLastSessionKey();
-  localStorage.retreiveSession(sessionRef);
+  localStorageId = localStorage.getNextId(lastSession);
+  localStorage.storePoint(sessionRef, x, y, didCollide, localStorageId);
+  localStorageId++;
   let ref = '/Sessions/' + lastSession;
   firebase
     .database()
@@ -99,7 +99,6 @@ function getLastSessionKey() {
 const publics = {
   tester: function() {
     localStorage.retreiveSession(sessionRef);
-    console.log('Running storage from db-manager: ');
   },
   getLastSessionPath: function() {
     let key = getLastSessionKey();
@@ -118,12 +117,17 @@ const publics = {
   startNewSession: function() {
     sessionRef = getCurrentDateTime();
     localStorageId = 1;
+    localStorage.saveLastKey(sessionRef);
   },
   pushToLatestSession: function(x, y, didCollide) {
     pushToLatestSession(x, y, didCollide);
   },
   pushToNewSession: function(x, y, didCollide) {
-    pushToNewSession(x, y, didCollide);
+    if (!sessionRef) {
+      pushToLatestSession(x, y, didCollide);
+    } else {
+      pushToNewSession(x, y, didCollide);
+    }
   },
 };
 
@@ -142,7 +146,6 @@ function getCurrentDateTime() {
   h = h > 9 ? h : '0' + h;
   min = min > 9 ? min : '0' + min;
   sec = sec > 9 ? sec : '0' + sec;
-  console.log('m = ', m);
   var date = y + '-' + m + '-' + d;
   var time = h + ':' + min + ':' + sec;
   var dateTime = date + ' ' + time;

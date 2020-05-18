@@ -34,7 +34,7 @@ class SessionsActivity extends React.Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={dbManager.getAllSession()}
+          data={dbManager.getAllSession().reverse()}
           renderItem={({item}) => (
             <TouchableOpacity
               onPressIn={() => (global.sessionsKey = item)}

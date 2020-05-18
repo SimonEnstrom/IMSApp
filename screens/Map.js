@@ -76,18 +76,21 @@ function setPath(key) {
   } else {
     arr = dbManager.getLastSessionPath();
   }
-  if (!arr) {
-    arr = getPointsFromLocal(global.sessionsKey);
-  }
-  try {
-    let lPath = '';
-    for (i in arr) {
-      lPath += pointToString(arr[i]);
+  if (!arr[0]) {
+    localStorage.getLastKey(function(response) {
+      setPathFromLocalStorage(response);
+    });
+  } else {
+    try {
+      let lPath = '';
+      for (i in arr) {
+        lPath += pointToString(arr[i]);
+      }
+      setCollisions(arr);
+      path = lPath;
+    } catch (error) {
+      console.log('Error creating path: ', error);
     }
-    setCollisions(arr);
-    path = lPath;
-  } catch (error) {
-    console.log('Error creating path: ', error);
   }
 }
 function setCollisions(arr) {
@@ -111,8 +114,14 @@ function pointToString(point) {
   var pString = point.x + ',' + point.y + ' ';
   return pString;
 }
-function getPointsFromLocal(key) {
-  return localStorage.retreiveSession(key);
+function setPathFromLocalStorage(key) {
+  localStorage.retreiveSession(key, function(points) {
+    var pointString = '';
+    for (p in points) {
+      pointString += pointToString(points[p]);
+    }
+    path = pointString;
+  });
 }
 
 const styles = StyleSheet.create({
