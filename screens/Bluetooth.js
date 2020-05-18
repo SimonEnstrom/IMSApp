@@ -256,7 +256,7 @@ class BluetoothActivity extends React.Component {
           }
           //New session
           dbManager.startNewSession();
-          dbManager.pushToNewSession(127, 127, 0)
+          dbManager.pushToNewSession(127, 127, 0);
           setTimeout(() => {
             BleManager.retrieveServices(peripheral.id).then(
               peripheralInfo => {
