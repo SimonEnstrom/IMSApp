@@ -49,7 +49,7 @@ function sendRandomPosToNewSession() {
   while (index < loopVar) {
     let xCord = Math.floor(Math.random() * 254);
     let yCord = Math.floor(Math.random() * 254);
-    let didCollide = false;
+    let didCollide = true;
     if (xCord < 63) {
       xCord = 0;
     } else if (xCord < 127) {
@@ -70,7 +70,7 @@ function sendRandomPosToOldSession() {
   while (index < loopVar) {
     let xCord = Math.floor(Math.random() * 254);
     let yCord = Math.floor(Math.random() * 254);
-    let didCollide = false;
+    let didCollide = true;
     if (xCord < 63) {
       xCord = 0;
     } else if (xCord < 127) {

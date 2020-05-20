@@ -35,15 +35,15 @@ class MapActivity extends React.Component {
               }}
             />
           </View>
-          <Svg height="80%" width="90%" viewBox="0 0 254 254">
+          <Svg height="80%" width="90%" viewBox="-3 -3 259 259">
             <Defs>
               <Marker
                 id="dot"
                 viewBox="0 0 10 10"
                 refX="0"
                 refY="0"
-                markerWidth="2"
-                markerHeight="2">
+                markerWidth="3"
+                markerHeight="3">
                 <Circle cx="0" cy="0" r="5" fill="red" />
               </Marker>
             </Defs>
