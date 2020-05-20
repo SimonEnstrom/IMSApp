@@ -361,13 +361,6 @@ class BluetoothActivity extends React.Component {
           <View style={{margin: 10, width: '50%'}}>
             <Button
               color="#273a60"
-              title="Manual drive"
-              onPress={() => this.props.navigation.navigate('ManualDrive')}
-            />
-          </View>
-          <View style={{margin: 10, width: '50%'}}>
-            <Button
-              color="#273a60"
               title="Drive"
               onPress={() => this.props.navigation.navigate('ManualDrive')}
             />

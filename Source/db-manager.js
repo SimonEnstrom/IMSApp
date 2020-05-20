@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-// import localStorage from '../Source/localStorage';
+import localStorage from '../Source/localStorage';
 
 var config = {
   databaseURL: 'https://ims-app-40ecf.firebaseio.com',
