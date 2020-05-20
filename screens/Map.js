@@ -15,6 +15,8 @@ class MapActivity extends React.Component {
       backgroundColor: '#73C6B6',
     },
   };
+
+  //Renders screen
   render() {
     return (
       <View style={styles.container}>
